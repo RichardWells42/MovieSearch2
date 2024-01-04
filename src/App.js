@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+//import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+//import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import Home from "./components/Home/Home";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
+import MovieDetail from "./components/MovieDetail/MovieDetail";
+import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Router>
+        <Header />
+        <div className='container'>
+          <Routes>
+            <Route path="/" element={<Home />} ></Route>
+            <Route path="/movie/:imdbID" element={<MovieDetail />} ></Route>
+            <Route path="*" element={<PageNotFound />} ></Route>
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
     </div>
   );
 }
+
+// function App() {
+
+//   const router = createBrowserRouter(createRoutesFromElements(
+//     <Route path="/" element={<Home />}>
+//       <Route path="/movie/:imdbID" element={<MovieDetail />} ></Route>
+//       <Route path="*" element={<PageNotFound />} ></Route>
+//     </Route>
+//   ))
+//   return (
+//     <div className="App">
+//         <div className='container'>
+//           <Header />
+//           <RouterProvider router={router} />
+//           <Footer />
+//         </div>  
+//     </div>
+//   );
+// }
 
 export default App;
